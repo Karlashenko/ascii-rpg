@@ -1,0 +1,4 @@
+.idea
+cmake-build-debug
+run.sh
+*.DS_Store
