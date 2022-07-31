@@ -2,7 +2,6 @@
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 
 #include <curses.h>
-#include <iostream>
 #include "Console.hpp"
 
 Console::Console()
@@ -47,6 +46,11 @@ int Console::ReadKey() const
 void Console::Draw(int x, int y, const char* symbol) const
 {
     Draw(x, y, symbol, Color::White);
+}
+
+void Console::Draw(const Vector2i& position, const char* symbol, const Color& color) const
+{
+    Draw(position.X, position.Y, symbol, color);
 }
 
 void Console::Draw(int x, int y, const char* symbol, const Color& color) const

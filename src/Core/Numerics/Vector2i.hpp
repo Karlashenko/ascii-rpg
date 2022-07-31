@@ -5,6 +5,12 @@
 
 struct Vector2i
 {
+    static const Vector2i& Zero()
+    {
+        static auto zero = Vector2i(0);
+        return zero;
+    }
+
     int X;
     int Y;
 
@@ -24,6 +30,17 @@ struct Vector2i
     {
     }
 
+    Vector2i& Clamped(const Vector2i& min, const Vector2i& max)
+    {
+        Clamp(min, max);
+        return *this;
+    }
+
+    void Clamp(const Vector2i& min, const Vector2i& max)
+    {
+        Clamp(min.X, max.X, min.Y, max.Y);
+    }
+
     void Clamp(int minX, int maxX, int minY, int maxY)
     {
         X = Math::Clamp(X, minX, maxX);
@@ -40,6 +57,19 @@ struct Vector2i
         return {X * scale, Y * scale};
     }
 
+    Vector2i operator+(const Vector2i& other) const
+    {
+        return {X + other.X, Y + other.Y};
+    }
+
+    Vector2i& operator+=(const Vector2i& other)
+    {
+        X += other.X;
+        Y += other.Y;
+
+        return *this;
+    }
+
     bool operator==(const Vector2i& other) const
     {
         return X == other.X && Y == other.Y;
@@ -48,5 +78,10 @@ struct Vector2i
     bool operator!=(const Vector2i& other) const
     {
         return !(other == *this);
+    }
+
+    [[nodiscard]] std::string ToString() const
+    {
+        return "X: " + std::to_string(X) + " Y: " + std::to_string(Y);
     }
 };

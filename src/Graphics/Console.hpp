@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Color.hpp"
+#include "../Core/Numerics/Vector2i.hpp"
 
 class Console final
 {
@@ -12,6 +13,7 @@ public:
 
     void Draw(int x, int y, const char* symbol) const;
     void Draw(int x, int y, const char* symbol, const Color& color) const;
+    void Draw(const Vector2i& position, const char* symbol, const Color& color) const;
     void Flush() const;
 
 private:
